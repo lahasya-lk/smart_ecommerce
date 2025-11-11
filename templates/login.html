@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-lg">
+  <h2 class="text-2xl font-bold mb-4 text-center text-indigo-600">🔐 Login</h2>
+
+  <form method="POST" class="flex flex-col space-y-4">
+    <label class="font-semibold">Select Role:</label>
+    <select name="role" id="role" class="border rounded-xl px-4 py-2 focus:ring-2 focus:ring-indigo-400" required onchange="togglePassword()">
+      <option value="customer">Customer</option>
+      <option value="admin">Admin</option>
+    </select>
+
+    <div id="passwordField" class="hidden">
+      <input type="password" name="password" placeholder="Enter admin password"
+             class="border rounded-xl px-4 py-2 focus:ring-2 focus:ring-indigo-400">
+    </div>
+
+    <button type="submit"
+      class="bg-indigo-600 text-white py-2 rounded-xl hover:bg-indigo-700 transition font-semibold">
+      Continue
+    </button>
+  </form>
+
+  {% if error %}
+  <p class="text-red-500 text-center mt-3">{{ error }}</p>
+  {% endif %}
+</div>
+
+<script>
+function togglePassword() {
+  const role = document.getElementById("role").value;
+  const field = document.getElementById("passwordField");
+  field.classList.toggle("hidden", role !== "admin");
+}
+</script>
+{% endblock %}

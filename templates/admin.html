@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h2 class="text-2xl font-bold mb-4 text-center text-indigo-600">👨‍💼 Admin Panel</h2>
+
+<div class="flex justify-center mb-6">
+    <a href="{{ url_for('update_prices') }}"
+       class="bg-green-600 text-white px-4 py-2 rounded-xl hover:bg-green-700 transition">
+        Run AI Price Update 🤖
+    </a>
+</div>
+
+<div class="max-w-xl mx-auto bg-white p-6 rounded-2xl shadow-md mb-10">
+    <h3 class="text-lg font-semibold mb-3">➕ Add New Product</h3>
+    <form method="POST" action="{{ url_for('add_product') }}" class="space-y-3">
+        <input type="text" name="name" placeholder="Product Name" required
+               class="border rounded-xl px-4 py-2 w-full focus:ring-2 focus:ring-indigo-400">
+        <input type="number" name="price" placeholder="Price" step="0.01" required
+               class="border rounded-xl px-4 py-2 w-full focus:ring-2 focus:ring-indigo-400">
+        <input type="number" name="stock" placeholder="Stock" required
+               class="border rounded-xl px-4 py-2 w-full focus:ring-2 focus:ring-indigo-400">
+        <input type="text" name="category" placeholder="Category" required
+               class="border rounded-xl px-4 py-2 w-full focus:ring-2 focus:ring-indigo-400">
+        <button type="submit"
+                class="bg-indigo-600 text-white py-2 px-4 rounded-xl hover:bg-indigo-700 transition">
+            Add Product
+        </button>
+    </form>
+</div>
+
+<h3 class="text-xl font-semibold mb-4 text-center">📦 Current Products</h3>
+<div class="overflow-x-auto">
+    <table class="min-w-full bg-white border border-gray-200 rounded-2xl shadow-md">
+        <thead class="bg-indigo-100">
+            <tr>
+                <th class="py-2 px-3 border">ID</th>
+                <th class="py-2 px-3 border">Name</th>
+                <th class="py-2 px-3 border">Price (₹)</th>
+                <th class="py-2 px-3 border">Stock</th>
+                <th class="py-2 px-3 border">Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in products %}
+            <tr class="hover:bg-gray-50 transition">
+                <td class="py-2 px-3 border text-center">{{ p.id }}</td>
+                <td class="py-2 px-3 border">{{ p.name }}</td>
+                <td class="py-2 px-3 border text-center">{{ p.price }}</td>
+                <td class="py-2 px-3 border text-center">{{ p.stock }}</td>
+                <td class="py-2 px-3 border">{{ p.category }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

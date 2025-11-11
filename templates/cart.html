@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h2 class="text-2xl font-semibold mb-6 text-center">🛒 Your Cart</h2>
+
+{% if cart %}
+  <table class="min-w-full bg-white border border-gray-200 rounded-2xl shadow-md mb-4">
+    <thead class="bg-indigo-100">
+      <tr>
+        <th class="py-2 px-3 border">Name</th>
+        <th class="py-2 px-3 border">Price (₹)</th>
+        <th class="py-2 px-3 border">Category</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in cart %}
+      <tr class="hover:bg-gray-50">
+        <td class="py-2 px-3 border">{{ item.name }}</td>
+        <td class="py-2 px-3 border text-center">{{ item.price }}</td>
+        <td class="py-2 px-3 border text-center">{{ item.category }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="text-center text-xl font-semibold mb-4">Total: ₹{{ total }}</div>
+  <div class="text-center">
+    <a href="{{ url_for('clear_cart') }}" class="bg-red-600 text-white px-4 py-2 rounded-xl hover:bg-red-700">Clear Cart</a>
+  </div>
+{% else %}
+  <p class="text-center text-gray-600">Your cart is empty.</p>
+{% endif %}
+{% endblock %}

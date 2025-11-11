@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart E-Commerce</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="bg-gray-50 text-gray-800">
+<nav class="bg-indigo-600 text-white p-4 flex justify-between items-center shadow-md">
+    <div class="text-lg font-semibold tracking-wide">
+        🛍️ Smart E-Commerce
+    </div>
+    <div class="space-x-4">
+        <a href="{{ url_for('index') }}" class="hover:underline">Home</a>
+        {% if session.get('admin') %}
+            <a href="{{ url_for('admin_panel') }}" class="hover:underline">Admin</a>
+            <a href="{{ url_for('logout') }}" class="hover:underline">Logout</a>
+        {% else %}
+            <a href="{{ url_for('login') }}" class="hover:underline">Admin Login</a>
+        {% endif %}
+    </div>
+</nav>
+
+<main class="container mx-auto p-6">
+    {% block content %}{% endblock %}
+</main>
+
+<footer class="text-center text-sm text-gray-500 py-4 border-t mt-6">
+    &copy; 2025 Smart E-Commerce | Powered by Flask & AI
+</footer>
+</body>
+</html>
